@@ -1,19 +1,21 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { StyleSheet, Text, View } from "react-native";
+import { NativeRouter, Route, Link } from "react-router-native";
+import LoginForm from "./components/LoginForm";
+import Home from "./views/Home";
+import Account from "./views/Account";
 
-export default function App() {
+const App = () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-    </View>
+    <NativeRouter>
+        <Route exact path="/" component={LoginForm} />
+        <Route exact path="/Home" component={Home} />
+        <Route exact path="/Account" component={Account} />
+    </NativeRouter>
   );
-}
+};
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+  
 });
+export default App;
