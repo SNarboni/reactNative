@@ -16,7 +16,7 @@ import { StyleSheet, Text, View, Image } from 'react-native';
 const styles = StyleSheet.create({
     listContainer:{
       borderWidth: 2,
-      display:1,
+      flex:1,
       flexDirection:"column",
       alignItems: "center",
       paddingVertical:15,
