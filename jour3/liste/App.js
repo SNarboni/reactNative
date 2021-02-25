@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View,Image } from "react-native";
+import { StyleSheet, Text, View, Image } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import List from "./components/List";
 
 const App = () => {
   const [tab, setTab] = useState("");
+  const [verif, setVerif] = useState(false);
 
   const searchCountry = () => {
     fetch("http://restcountries.eu/rest/v2/all")
       .then((response) => response.json())
       .then((result) => {
         setTab(result);
-        console.log(result[0].flag);
+        console.log(result[0]);
+        setVerif(true)
       });
   };
 
@@ -19,17 +21,26 @@ const App = () => {
     searchCountry();
   }, []);
 
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <FlatList
-        data={tab}
-        renderItem={(element) => {
-          return (<List name={element.item.name} capital={element.item.capital} flag={element.item.flag}></List>);
-        }}
-      />
-    </View>
-  );
+  const check = () => {
+    if(verif){
+      return(
+      <View style={styles.container}>
+        <Text>Open up App.js to start working on your app!</Text>
+        <FlatList
+          data={tab}
+          renderItem={(element) => {
+            return (<List name={element.item.name} capital={element.item.capital} flag={element.item.flag}></List>);
+          }}
+        />
+      </View>)
+    }else {
+      return(<Text>lorading....</Text>)
+    }
+  }
+
+    return (
+      check()
+    );
 };
 
 const styles = StyleSheet.create({
